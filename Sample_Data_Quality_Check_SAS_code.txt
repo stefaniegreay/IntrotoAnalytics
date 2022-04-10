@@ -1,0 +1,151 @@
+/*****************************************************************************************************************
+ 
+SAS file name: Sample_Data_Quality_Checks.sas
+File location: The location of the SAS file
+__________________________________________________________________________________________________________________
+ 
+Purpose: Sample SAS code for data quality checks
+Author: Dr. Stefanie G. Reay
+Creation Date: 09/05/2021
+ 
+This code is sample code for data quality checks in SAS.  This code uses the Sepsis data located here: 
+Dataset reference:
+Skoryk, M. (2021). Sepsis Prediction from Clinical Data. Version 1.
+Retrieved from https://www.kaggle.com/maxskoryk/datasepsis
+__________________________________________________________________________________________________________________
+ 
+CHANGES:
+ 
+Date: 04/10/2022
+Modifyer name: Dr. Stefanie G. Reay
+Description: Added standard program header.  Reference for header can be found here: https://sasnrd.com/sas-standard-program-header/
+ 
+*****************************************************************************************************************/
+
+
+libname mydata '/home/stefaniegreay/';
+
+data mydata.sepsis;
+set work.import;
+run;
+
+proc contents data=mydata.sepsis;
+run;
+
+proc print data=mydata.sepsis(obs=25);
+run;
+
+proc univariate data=mydata.sepsis plots;
+run;
+
+proc means data=mydata.sepsis nmiss;
+run;
+
+proc freq data=mydata.sepsis;
+tables gender;
+run;
+
+proc freq data=mydata.sepsis;
+tables _CHAR_;
+run;
+
+
+
+data mydata.sepsis1;
+set mydata.sepsis;
+if HR='NaN' then HR=''; HR_n=input(HR,best12.);
+if AST='NaN' then AST=' ';AST_n=input(AST,best12.);
+if Alkalinephos='NaN' then Alkalinephos=' ';Alkalinephos_n=input(Alkalinephos,best12.);
+if BUN='NaN' then BUN=' ';BUN_n=input(BUN,best12.);
+if BaseExcess='NaN' then BaseExcess=' ';BaseExcess_n=input(BaseExcess,best12.);
+if Bilirubin_direct='NaN' then Bilirubin_direct=' ';Bilirubin_direct_n=input(Bilirubin_direct,best12.);
+if Bilirubin_total='NaN' then Bilirubin_total=' ';Bilirubin_total_n=input(Bilirubin_total,best12.);
+if Calcium='NaN' then Calcium=' ';Calcium_n=input(Calcium,best12.);
+if Chloride='NaN' then Chloride=' ';Chloride_n=input(Chloride,best12.);
+if Creatinine='NaN' then Creatinine=' ';Creatinine_n=input(Creatinine,best12.);
+if DBP='NaN' then DBP=' ';DBP_n=input(DBP,best12.);
+if EtCO2='NaN' then EtCO2=' ';EtCO2_n=input(EtCO2,best12.);
+if FiO2='NaN' then FiO2=' ';FiO2_n=input(FiO2,best12.);
+if Fibrinogen='NaN' then Fibrinogen=' ';Fibrinogen_n=input(Fibrinogen,best12.);
+if Glucose='NaN' then Glucose=' ';Glucose_n=input(Glucose,best12.);
+if HCO3='NaN' then HCO3=' ';HCO3_n=input(HCO3,best12.);
+if HR='NaN' then HR=' ';HR_n=input(HR,best12.);
+if Hct='NaN' then Hct=' ';Hct_n=input(Hct,best12.);
+if Hgb='NaN' then Hgb=' ';Hgb_n=input(Hgb,best12.);
+if Lactate='NaN' then Lactate=' ';Lactate_n=input(Lactate,best12.);
+if MAP='NaN' then MAP=' ';MAP_n=input(MAP,best12.);
+if Magnesium='NaN' then Magnesium=' ';Magnesium_n=input(Magnesium,best12.);
+if O2Sat='NaN' then O2Sat=' ';O2Sat_n=input(O2Sat,best12.);
+if PTT='NaN' then PTT=' ';PTT_n=input(PTT,best12.);
+if PaCO2='NaN' then PaCO2=' ';PaCO2_n=input(PaCO2,best12.);
+if Phosphate='NaN' then Phosphate=' ';Phosphate_n=input(Phosphate,best12.);
+if Platelets='NaN' then Platelets=' ';Platelets_n=input(Platelets,best12.);
+if Potassium='NaN' then Potassium=' ';Potassium_n=input(Potassium,best12.);
+if Resp='NaN' then Resp=' ';Resp_n=input(Resp,best12.);
+if SBP='NaN' then SBP=' ';SBP_n=input(SBP,best12.);
+if SaO2='NaN' then SaO2=' ';SaO2_n=input(SaO2,best12.);
+if Temp='NaN' then Temp=' ';Temp_n=input(Temp,best12.);
+if TroponinI='NaN' then TroponinI=' ';TroponinI_n=input(TroponinI,best12.);
+if Unit1='NaN' then Unit1=' ';Unit1_n=input(Unit1,best12.);
+if Unit2='NaN' then Unit2=' ';Unit2_n=input(Unit2,best12.);
+if WBC='NaN' then WBC=' ';WBC_n=input(WBC,best12.);
+if pH='NaN' then pH=' ';pH_n=input(pH,best12.);
+drop AST
+Alkalinephos
+BUN
+BaseExcess
+Bilirubin_direct
+Bilirubin_total
+Calcium
+Chloride
+Creatinine
+DBP
+EtCO2
+FiO2
+Fibrinogen
+Glucose
+HCO3
+HR
+HR_n
+Hct
+Hgb
+Lactate
+MAP
+Magnesium
+O2Sat
+PTT
+PaCO2
+Phosphate
+Platelets
+Potassium
+Resp
+SBP
+SaO2
+Temp
+TroponinI
+Unit1
+Unit2
+WBC
+pH;
+run;
+
+proc contents data=mydata.sepsis1;
+run;
+
+
+proc print data=mydata.sepsis1(obs=25);
+run;
+
+proc univariate data=mydata.sepsis1 plots;
+run;
+
+proc means data=mydata.sepsis1 nmiss;
+run;
+
+proc freq data=mydata.sepsis1;
+tables gender;
+run;
+
+proc freq data=mydata.sepsis1;
+tables _CHAR_;
+run;
